@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:10:32 by luide-so          #+#    #+#             */
-/*   Updated: 2023/09/20 03:08:38 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:26:37 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init_mutexes(t_table *table)
 	while (++i < table->n_philos)
 	{
 		pthread_mutex_init(&table->forks[i], NULL);
-		pthread_mutex_init(&table->philos[i].last_meal_mutex, NULL);
+		pthread_mutex_init(&table->philos[i].status_mutex, NULL);
 	}
 }
 
@@ -41,7 +41,7 @@ static int	init_table(t_table *table, int argc, char **argv)
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->n_philos);
 	table->philos = malloc(sizeof(t_philo) * table->n_philos);
 	if (!table->philos || !table->forks)
-		return (error_msg("Error: Failed to allocate memory\n"));
+		return (error_msg("Error: Failed to allocate memory\n"), 0);
 	init_mutexes(table);
 	table->start_time = get_time();
 	i = -1;
@@ -52,7 +52,7 @@ static int	init_table(t_table *table, int argc, char **argv)
 		table->philos[i].last_meal = table->start_time;
 		table->philos[i].table = table;
 	}
-	return (0);
+	return (1);
 }
 
 static int	invalid_args(int argc, char **argv)
@@ -76,7 +76,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!init_table(&table, argc, argv))
 		return (1);
-	if (start_threads(&table))
+	if (threads(&table))
 		return (1);
+	free_table(&table);
 	return (0);
 }

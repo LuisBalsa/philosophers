@@ -6,21 +6,22 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/19 23:43:05 by luide-so          #+#    #+#              #
-#    Updated: 2023/09/20 00:12:43 by luide-so         ###   ########.fr        #
+#    Updated: 2023/09/22 14:19:13 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS	=	-Wall -Wextra -Werror #-g -fsanitize=thread
 INC		=	-I include
 RM		=	rm -rf
 
 OBJ_DIR	=	obj
 VPATH	=	src
 
-_FILES	=	main \
-			utils
+_FILES	=	main utils \
+			threads \
+			routine routine_utils
 OBJS	=	$(_FILES:%=%.o)
 TARGET	=	$(addprefix $(OBJ_DIR)/, $(OBJS))
 
