@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 02:09:39 by luide-so          #+#    #+#             */
-/*   Updated: 2023/09/23 19:23:45 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:39:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ static int	sleeping(t_philo *philo)
 
 static int	eat(t_philo *philo, int id, int n_philos)
 {
-/* 	int			first_fork_to_pick;
-	int			second_fork_to_pick; */
 	suseconds_t	current_time;
 
-/*	first_fork_to_pick = (id - !(id % 2)) % n_philos;
-	second_fork_to_pick = (id - (id % 2)) % n_philos; */
 	pthread_mutex_lock(&philo->table->forks[id % n_philos]);
 	print_status(philo, FORKS);
 	if (philo->table->n_philos == 1)
@@ -67,7 +63,6 @@ void	*routine(void *arg)
 			break ;
 		if (!print_status(philo, THINKING))
 			break ;
-//		usleep(philo->table->time_to_die / 20);
 	}
 	return (NULL);
 }

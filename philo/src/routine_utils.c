@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:27:43 by luide-so          #+#    #+#             */
-/*   Updated: 2023/09/22 22:18:32 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:40:42 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	print_status(t_philo *philo, char *status)
 {
 	suseconds_t	time;
 
-	time = get_time() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->dead);
 	if (philo->table->someone_died)
 		return (pthread_mutex_unlock(&philo->table->dead), 0);
 	pthread_mutex_unlock(&philo->table->dead);
 	pthread_mutex_lock(&philo->table->print);
+	time = get_time() - philo->table->start_time;
 	printf("%ld %d %s\n", time, philo->id, status);
 	pthread_mutex_unlock(&philo->table->print);
 	return (1);
