@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:34:26 by luide-so          #+#    #+#             */
-/*   Updated: 2023/09/22 12:47:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:41:23 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_table(t_table *table)
 	pthread_mutex_destroy(&table->print);
 	pthread_mutex_destroy(&table->dead);
 	free(table->forks);
+	free(table->fork_taken);
 	free(table->philos);
 }
 
@@ -46,16 +47,20 @@ int	atoi_mod(const char *nptr)
 	return (nb);
 }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	while (*s)
-		write(fd, s++, 1);
-}
-
 int	error_msg(char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	if (!msg)
+		return (0);
+	while (*msg)
+		write(2, msg++, 1);
 	return (1);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*p;
+
+	p = s;
+	while (n-- > 0)
+		*p++ = '\0';
 }

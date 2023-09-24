@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 10:42:53 by luide-so          #+#    #+#             */
-/*   Updated: 2023/09/22 15:26:30 by luide-so         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:54:07 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_table
 	int				someone_died;
 	pthread_mutex_t	dead;
 	pthread_mutex_t	print;
+	int				*fork_taken;
 	pthread_mutex_t	*forks;
 	struct s_philo	*philos;
 }				t_table;
@@ -67,9 +68,9 @@ int			satisfied_or_someone_died(t_philo *philo);
 
 void		free_table(t_table *table);
 suseconds_t	get_time(void);
-void		ft_putstr_fd(char *s, int fd);
 int			atoi_mod(const char *nptr);
 int			error_msg(char *msg);
+void		ft_bzero(void *s, size_t n);
 int			print_status(t_philo *philo, char *status);
 
 #endif

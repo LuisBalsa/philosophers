@@ -6,13 +6,13 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/19 23:43:05 by luide-so          #+#    #+#              #
-#    Updated: 2023/09/22 14:19:13 by luide-so         ###   ########.fr        #
+#    Updated: 2023/09/24 12:40:14 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror #-g -fsanitize=thread
+CFLAGS	=	-Wall -Wextra -Werror -pthread -g #-fsanitize=thread
 INC		=	-I include
 RM		=	rm -rf
 
